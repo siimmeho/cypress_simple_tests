@@ -8,12 +8,35 @@ Assignement 4: add content to the following tests
 
 describe('Section 1: Functional tests', () => {
 
-    it('User can use only same both first and validation passwords', ()=>{
+    it.only('User can use only same both first and validation passwords', ()=>{
         // Add test steps for filling in only mandatory fields
         // Type confirmation password which is different from first password
         // Assert that submit button is not enabled
         // Assert that successful message is not visible
         // Assert that error message is visible
+
+        cy.get('[data-testid="phoneNumberTestId"]').type('555666777')
+        cy.get('[data-cy="name"]').type('Siim')
+        cy.get('[data-testid="lastNameTestId"]').type('Meho')
+        cy.get('input[name="password"]').type('SiimPass')
+        cy.get('[name="confirm"]').type('SiimPass')
+        cy.get('#username').type('Something')
+
+        //in order to activate submit button, user has to click somewhere outside the input field
+        cy.get('h2').contains('Password').click()
+
+        cy.get('.submit_button').should('be.enabled')
+        cy.get('.submit_button').click()
+
+        // Assert that both input and password error messages are not shown
+        // next 2 lines check exactly the same, but using different approach
+        cy.get('#input_error_message').should('not.be.visible')
+        cy.get('#password_error_message').should('have.css', 'display', 'none')
+
+        // Assert that success message is visible
+        // next 2 lines check exactly the same, but using different approach
+        cy.get('#success_message').should('be.visible')
+        cy.get('#success_message').should('have.css', 'display', 'block')
     })
     
     it('User can submit form with all fields added', ()=>{
