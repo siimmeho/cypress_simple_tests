@@ -20,7 +20,7 @@ describe('This is first test suite, Siim Meho', () => {
     // 12.06.2023
     it('User can submit data only when valid mandatory values are added', () => {
         cy.get('[data-testid="phoneNumberTestId"]').type('555666777')
-        cy.get('[data-cy="name"]').type('Siim')
+        cy.get('[id="firstName"]').type('Siim')
         cy.get('[data-testid="lastNameTestId"]').type('Meho')
         cy.get('input[name="password"]').type('SiimPass')
         cy.get('[name="confirm"]').type('SiimPass')
@@ -103,6 +103,7 @@ describe('This is first test suite, Siim Meho', () => {
         cy.get('#username').type('johnDoe')
         cy.get('input[name="password"]').type('MyPass')
         cy.get('[name="confirm"]').type('MyPass')
+
 
         cy.get('h2').contains('Password').click()
 
